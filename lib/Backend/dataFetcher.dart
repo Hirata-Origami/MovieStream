@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moviestream/Backend/media.dart';
 import 'package:tmdb_api/tmdb_api.dart';
+import 'package:http/http.dart' as http;
 
 class DataFetcher extends GetxController {
   static final DataFetcher _instance = DataFetcher._internal();
@@ -54,10 +56,15 @@ class DataFetcher extends GetxController {
     }
   }
 
-  Future<Map<int, List<Map<String, dynamic>>>> fetchSeasonDetails(
-      int tvId) async {
-    Map<int, List<Map<String, dynamic>>> seasonDetails = {};
-    return seasonDetails;
+  Future<Map<String, dynamic>> fetchSeasonDetails(int tvId) async {
+    Map<String, dynamic> response = {};
+    try {
+      response = (await tmdb.v3.tv.getDetails(tvId)) as Map<String, dynamic>;
+      return response;
+    } catch (e) {
+      print("Error fetching season details: $e");
+    }
+    return response;
   }
 
   void fetchAnime() async {

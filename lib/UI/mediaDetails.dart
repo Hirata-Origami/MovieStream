@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moviestream/Backend/dataFetcher.dart';
 import 'package:moviestream/Backend/mediaData.dart';
+import 'package:moviestream/UI/test.dart';
 import 'package:moviestream/Utils/dropdown.dart';
 import 'package:moviestream/Utils/overview.dart';
 import 'package:moviestream/Utils/player.dart';
@@ -31,10 +32,6 @@ class _MediaDetailsState extends State<MediaDetails> {
   Future<void> fetchData() async {
     Get.lazyPut<DataFetcher>(() => DataFetcher());
     mediaController = Get.find<DataFetcher>();
-    print(widget.media.id.value);
-    var temp =
-        await mediaController.fetchSeasonDetails(widget.media.id.value ?? 0);
-    print(temp);
   }
 
   @override
