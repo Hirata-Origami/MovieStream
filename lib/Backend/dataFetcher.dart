@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moviestream/Backend/episode.dart';
 import 'package:moviestream/Backend/media.dart';
 import 'package:tmdb_api/tmdb_api.dart';
-import 'package:http/http.dart' as http;
 
 class DataFetcher extends GetxController {
   static final DataFetcher _instance = DataFetcher._internal();
@@ -18,6 +17,7 @@ class DataFetcher extends GetxController {
   var popular = Media().obs;
   var topRated = Media().obs;
   var airingToday = Media().obs;
+  var episodes = <int, List<EpisodeElement>>{}.obs;
 
   void fetchMovies() async {
     try {
@@ -56,15 +56,26 @@ class DataFetcher extends GetxController {
     }
   }
 
-  Future<Map<String, dynamic>> fetchSeasonDetails(int tvId) async {
+  void fetchSeasonDetails(int tvId) async {
     Map<String, dynamic> response = {};
     try {
       response = (await tmdb.v3.tv.getDetails(tvId)) as Map<String, dynamic>;
-      return response;
+      var seasonNumber = response['numberOfSeasons'];
+      Map allEpisodes = {};
+      for (int i = 1; i <= seasonNumber; i++) {
+        response = (await tmdb.v3.tvSeasons.getDetails(tvId, i))
+            as Map<String, dynamic>;
+        List<EpisodeElement> episodesList =
+            (Episode.fromJson(response).episodes as List)
+                .map((episodeData) => EpisodeElement.fromJson(episodeData))
+                .toList();
+        allEpisodes[i] = episodesList;
+      }
+      episodes.value = allEpisodes as Map<int, List<EpisodeElement>>;
+      print("hello ${allEpisodes.length}");
     } catch (e) {
       print("Error fetching season details: $e");
     }
-    return response;
   }
 
   void fetchAnime() async {

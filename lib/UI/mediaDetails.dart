@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moviestream/Backend/dataFetcher.dart';
+import 'package:moviestream/Backend/episode.dart';
 import 'package:moviestream/Backend/mediaData.dart';
-import 'package:moviestream/UI/test.dart';
 import 'package:moviestream/Utils/dropdown.dart';
 import 'package:moviestream/Utils/overview.dart';
 import 'package:moviestream/Utils/player.dart';
@@ -22,16 +22,21 @@ class MediaDetails extends StatefulWidget {
 
 class _MediaDetailsState extends State<MediaDetails> {
   late final DataFetcher mediaController;
+  var episodes = <int, List<EpisodeElement>>{}.obs;
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    print(episodes.length);
   }
 
   Future<void> fetchData() async {
     Get.lazyPut<DataFetcher>(() => DataFetcher());
     mediaController = Get.find<DataFetcher>();
+    print(widget.media.id.value!);
+    mediaController.fetchSeasonDetails(widget.media.id.value!);
+    episodes = mediaController.episodes;
   }
 
   @override
@@ -106,124 +111,122 @@ class _MediaDetailsState extends State<MediaDetails> {
                           width: screenWidth * 0.3,
                         )),
                   SizedBox(width: screenWidth * 0.04),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: screenHeight * 0.02),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Obx(() => SizedBox(
-                                  width: screenWidth * 0.4,
-                                  child: Text(
-                                    GenreMapper.getGenresByIds(
-                                            widget.media.genreIds)
-                                        .join(', '),
-                                    style: TextStyle(fontSize: 16),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                )),
-                            SizedBox(height: screenHeight * 0.01),
-                            Obx(() => Text(
-                                  ((widget.media is TvData
-                                              ? (widget.media as TvData)
-                                                  .firstAirDate
-                                                  .value
-                                              : (widget.media as MovieData)
-                                                  .releaseDate
-                                                  .value) ??
-                                          '0000')
-                                      .substring(0, 4),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: screenHeight * 0.02),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(() => SizedBox(
+                                width: screenWidth * 0.4,
+                                child: Text(
+                                  GenreMapper.getGenresByIds(
+                                          widget.media.genreIds)
+                                      .join(', '),
+                                  style: TextStyle(fontSize: 16),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              )),
+                          SizedBox(height: screenHeight * 0.01),
+                          Obx(() => Text(
+                                ((widget.media is TvData
+                                            ? (widget.media as TvData)
+                                                .firstAirDate
+                                                .value
+                                            : (widget.media as MovieData)
+                                                .releaseDate
+                                                .value) ??
+                                        '0000')
+                                    .substring(0, 4),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Icon(Icons.add,
+                                  size: screenWidth * 0.06,
+                                  color: Colors.white),
+                              SizedBox(height: screenHeight * 0.005),
+                              Text(
+                                "My List",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: screenWidth * 0.05),
+                          Column(
+                            children: [
+                              Icon(Icons.thumb_up,
+                                  size: screenWidth * 0.06,
+                                  color: Colors.white),
+                              SizedBox(height: screenHeight * 0.005),
+                              Text(
+                                "Rate",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: screenWidth * 0.05),
+                          Column(
+                            children: [
+                              Icon(Icons.share,
+                                  size: screenWidth * 0.06,
+                                  color: Colors.white),
+                              SizedBox(height: screenHeight * 0.005),
+                              Text(
+                                "Share",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+                      Center(
+                        child: Obx(() {
+                          final vote = widget.media.voteAverage.value;
+                          Color voteColor;
+                          if (vote! < 4.0) {
+                            voteColor = Colors.red;
+                          } else if (vote < 7.0) {
+                            voteColor = Colors.yellow;
+                          } else {
+                            voteColor = Colors.green;
+                          }
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("Vote Average: ",
                                   style: TextStyle(
                                     fontSize: 18,
-                                  ),
-                                )),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Icon(Icons.add,
-                                    size: screenWidth * 0.06,
-                                    color: Colors.white),
-                                SizedBox(height: screenHeight * 0.005),
-                                Text(
-                                  "My List",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: screenWidth * 0.05),
-                            Column(
-                              children: [
-                                Icon(Icons.thumb_up,
-                                    size: screenWidth * 0.06,
-                                    color: Colors.white),
-                                SizedBox(height: screenHeight * 0.005),
-                                Text(
-                                  "Rate",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: screenWidth * 0.05),
-                            Column(
-                              children: [
-                                Icon(Icons.share,
-                                    size: screenWidth * 0.06,
-                                    color: Colors.white),
-                                SizedBox(height: screenHeight * 0.005),
-                                Text(
-                                  "Share",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Center(
-                          child: Obx(() {
-                            final vote = widget.media.voteAverage.value;
-                            Color voteColor;
-                            if (vote! < 4.0) {
-                              voteColor = Colors.red;
-                            } else if (vote < 7.0) {
-                              voteColor = Colors.yellow;
-                            } else {
-                              voteColor = Colors.green;
-                            }
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text("Vote Average: ",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal,
-                                    )),
-                                Text(
-                                  vote.toString(),
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: voteColor,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.normal,
-                                  ),
+                                  )),
+                              Text(
+                                vote.toString(),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: voteColor,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                              ],
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
+                              ),
+                            ],
+                          );
+                        }),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -255,7 +258,11 @@ class _MediaDetailsState extends State<MediaDetails> {
             SizedBox(height: screenHeight * 0.02),
             OverView(overview: widget.media.overview.value),
             SizedBox(height: screenHeight * 0.04),
-            if (widget.media.isSeries.value == true) Dropdown(seasonCount: 10)
+            if (widget.media.isSeries.value == true)
+              Dropdown(
+                seasonCount: episodes.length,
+                episodes: episodes,
+              )
           ],
         ),
       ),
