@@ -1,3 +1,23 @@
+import 'package:get/get.dart';
+
+class EpisodeController extends GetxController {
+  var episode = Episode(
+    id: null,
+    airDate: null,
+    episodes: [],
+    name: null,
+    overview: null,
+    episodeId: null,
+    posterPath: null,
+    seasonNumber: null,
+    voteAverage: null,
+  ).obs;
+
+  void updateEpisode(Episode newEpisode) {
+    episode.value = newEpisode;
+  }
+}
+
 class Episode {
   Episode({
     required this.id,

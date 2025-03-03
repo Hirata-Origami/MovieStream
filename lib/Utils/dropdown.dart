@@ -72,7 +72,7 @@ class EpisodeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String truncatedOverview =
-        episode.overview!.split(' ').take(2).join(' ') + '...' ?? '';
+        '${episode.overview!.split(' ').take(2).join(' ')}...';
 
     return ListTile(
       leading: episode.stillPath != null

@@ -1,105 +1,139 @@
-class Season {
-  Season({
-    required this.adult,
-    required this.backdropPath,
-    required this.createdBy,
-    required this.episodeRunTime,
-    required this.firstAirDate,
-    required this.genres,
-    required this.homepage,
-    required this.id,
-    required this.inProduction,
-    required this.languages,
-    required this.lastAirDate,
-    required this.lastEpisodeToAir,
-    required this.name,
-    required this.nextEpisodeToAir,
-    required this.networks,
-    required this.numberOfEpisodes,
-    required this.numberOfSeasons,
-    required this.originCountry,
-    required this.originalLanguage,
-    required this.originalName,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.productionCompanies,
-    required this.productionCountries,
-    required this.seasons,
-    required this.spokenLanguages,
-    required this.status,
-    required this.tagline,
-    required this.type,
-    required this.voteAverage,
-    required this.voteCount,
-  });
+import 'package:get/get.dart';
+import 'package:moviestream/Backend/genre.dart';
 
-  final bool adult;
-  final String backdropPath;
-  final List<CreatedBy> createdBy;
-  final List<dynamic> episodeRunTime;
-  final DateTime? firstAirDate;
-  final List<Genre> genres;
-  final String homepage;
-  final int id;
-  final bool inProduction;
-  final List<String> languages;
-  final DateTime? lastAirDate;
-  final LastEpisodeToAir? lastEpisodeToAir;
-  final String name;
-  final dynamic nextEpisodeToAir;
-  final List<Network> networks;
-  final int numberOfEpisodes;
-  final int numberOfSeasons;
-  final List<String> originCountry;
-  final String originalLanguage;
-  final String originalName;
-  final String overview;
-  final double popularity;
-  final String posterPath;
-  final List<Network> productionCompanies;
-  final List<ProductionCountry> productionCountries;
-  final List<SeasonElement> seasons;
-  final List<SpokenLanguage> spokenLanguages;
-  final String status;
-  final String tagline;
-  final String type;
-  final double voteAverage;
-  final int voteCount;
+class Season extends GetxController {
+  Season({
+    required RxBool adult,
+    required Rx<String?> backdropPath,
+    required RxList<CreatedBy> createdBy,
+    required RxList<int> episodeRunTime,
+    required Rx<DateTime?> firstAirDate,
+    required RxList<Genre> genres,
+    required Rx<String?> homepage,
+    required RxInt id,
+    required RxBool inProduction,
+    required RxList<String> languages,
+    required Rx<DateTime?> lastAirDate,
+    required Rx<LastEpisodeToAir?> lastEpisodeToAir,
+    required RxString name,
+    required Rx<NextEpisodeToAir?> nextEpisodeToAir,
+    required RxList<Network> networks,
+    required RxInt numberOfEpisodes,
+    required RxInt numberOfSeasons,
+    required RxList<String> originCountry,
+    required RxString originalLanguage,
+    required RxString originalName,
+    required RxString overview,
+    required RxDouble popularity,
+    required Rx<String?> posterPath,
+    required RxList<Network> productionCompanies,
+    required RxList<ProductionCountry> productionCountries,
+    required RxList<SeasonElement> seasons,
+    required RxList<SpokenLanguage> spokenLanguages,
+    required RxString status,
+    required Rx<String?> tagline,
+    required RxString type,
+    required RxDouble voteAverage,
+    required RxInt voteCount,
+  })  : adult = adult,
+        backdropPath = backdropPath,
+        createdBy = createdBy,
+        episodeRunTime = episodeRunTime,
+        firstAirDate = firstAirDate,
+        genres = genres,
+        homepage = homepage,
+        id = id,
+        inProduction = inProduction,
+        languages = languages,
+        lastAirDate = lastAirDate,
+        lastEpisodeToAir = lastEpisodeToAir,
+        name = name,
+        nextEpisodeToAir = nextEpisodeToAir,
+        networks = networks,
+        numberOfEpisodes = numberOfEpisodes,
+        numberOfSeasons = numberOfSeasons,
+        originCountry = originCountry,
+        originalLanguage = originalLanguage,
+        originalName = originalName,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        productionCompanies = productionCompanies,
+        productionCountries = productionCountries,
+        seasons = seasons,
+        spokenLanguages = spokenLanguages,
+        status = status,
+        tagline = tagline,
+        type = type,
+        voteAverage = voteAverage,
+        voteCount = voteCount;
+
+  final RxBool adult;
+  final Rx<String?> backdropPath;
+  final RxList<CreatedBy> createdBy;
+  final RxList<int> episodeRunTime;
+  final Rx<DateTime?> firstAirDate;
+  final RxList<Genre> genres;
+  final Rx<String?> homepage;
+  final RxInt id;
+  final RxBool inProduction;
+  final RxList<String> languages;
+  final Rx<DateTime?> lastAirDate;
+  final Rx<LastEpisodeToAir?> lastEpisodeToAir;
+  final RxString name;
+  final Rx<NextEpisodeToAir?> nextEpisodeToAir;
+  final RxList<Network> networks;
+  final RxInt numberOfEpisodes;
+  final RxInt numberOfSeasons;
+  final RxList<String> originCountry;
+  final RxString originalLanguage;
+  final RxString originalName;
+  final RxString overview;
+  final RxDouble popularity;
+  final Rx<String?> posterPath;
+  final RxList<Network> productionCompanies;
+  final RxList<ProductionCountry> productionCountries;
+  final RxList<SeasonElement> seasons;
+  final RxList<SpokenLanguage> spokenLanguages;
+  final RxString status;
+  final Rx<String?> tagline;
+  final RxString type;
+  final RxDouble voteAverage;
+  final RxInt voteCount;
 
   Season copyWith({
-    bool? adult,
-    String? backdropPath,
-    List<CreatedBy>? createdBy,
-    List<dynamic>? episodeRunTime,
-    DateTime? firstAirDate,
-    List<Genre>? genres,
-    String? homepage,
-    int? id,
-    bool? inProduction,
-    List<String>? languages,
-    DateTime? lastAirDate,
-    LastEpisodeToAir? lastEpisodeToAir,
-    String? name,
-    dynamic? nextEpisodeToAir,
-    List<Network>? networks,
-    int? numberOfEpisodes,
-    int? numberOfSeasons,
-    List<String>? originCountry,
-    String? originalLanguage,
-    String? originalName,
-    String? overview,
-    double? popularity,
-    String? posterPath,
-    List<Network>? productionCompanies,
-    List<ProductionCountry>? productionCountries,
-    List<SeasonElement>? seasons,
-    List<SpokenLanguage>? spokenLanguages,
-    String? status,
-    String? tagline,
-    String? type,
-    double? voteAverage,
-    int? voteCount,
+    RxBool? adult,
+    Rx<String?>? backdropPath,
+    RxList<CreatedBy>? createdBy,
+    RxList<int>? episodeRunTime,
+    Rx<DateTime?>? firstAirDate,
+    RxList<Genre>? genres,
+    Rx<String?>? homepage,
+    RxInt? id,
+    RxBool? inProduction,
+    RxList<String>? languages,
+    Rx<DateTime?>? lastAirDate,
+    Rx<LastEpisodeToAir?>? lastEpisodeToAir,
+    RxString? name,
+    Rx<NextEpisodeToAir?>? nextEpisodeToAir,
+    RxList<Network>? networks,
+    RxInt? numberOfEpisodes,
+    RxInt? numberOfSeasons,
+    RxList<String>? originCountry,
+    RxString? originalLanguage,
+    RxString? originalName,
+    RxString? overview,
+    RxDouble? popularity,
+    Rx<String?>? posterPath,
+    RxList<Network>? productionCompanies,
+    RxList<ProductionCountry>? productionCountries,
+    RxList<SeasonElement>? seasons,
+    RxList<SpokenLanguage>? spokenLanguages,
+    RxString? status,
+    Rx<String?>? tagline,
+    RxString? type,
+    RxDouble? voteAverage,
+    RxInt? voteCount,
   }) {
     return Season(
       adult: adult ?? this.adult,
@@ -139,106 +173,112 @@ class Season {
 
   factory Season.fromJson(Map<String, dynamic> json) {
     return Season(
-      adult: json["adult"] ?? false,
-      backdropPath: json["backdrop_path"] ?? "",
-      createdBy: json["created_by"] == null
+      adult: (json["adult"] ?? false).obs,
+      backdropPath: (json["backdrop_path"] as String?).obs,
+      createdBy: RxList<CreatedBy>.from(json["created_by"] == null
           ? []
-          : List<CreatedBy>.from(
-              json["created_by"]!.map((x) => CreatedBy.fromJson(x))),
-      episodeRunTime: json["episode_run_time"] == null
+          : json["created_by"]!.map((x) => CreatedBy.fromJson(x))),
+      episodeRunTime: RxList<int>.from(json["episode_run_time"] == null
           ? []
-          : List<dynamic>.from(json["episode_run_time"]!.map((x) => x)),
-      firstAirDate: DateTime.tryParse(json["first_air_date"] ?? ""),
-      genres: json["genres"] == null
+          : json["episode_run_time"]!.map((x) => x as int)),
+      firstAirDate: (json["first_air_date"] == null
+              ? null
+              : DateTime.tryParse(json["first_air_date"]))
+          .obs,
+      genres: RxList<Genre>.from(json["genres"] == null
           ? []
-          : List<Genre>.from(json["genres"]!.map((x) => Genre.fromJson(x))),
-      homepage: json["homepage"] ?? "",
-      id: json["id"] ?? 0,
-      inProduction: json["in_production"] ?? false,
-      languages: json["languages"] == null
+          : json["genres"]!.map((x) => Genre(x["id"], x["name"]))),
+      homepage: (json["homepage"] as String?).obs,
+      id: (json["id"] ?? 0).obs,
+      inProduction: (json["in_production"] ?? false).obs,
+      languages: RxList<String>.from(json["languages"] == null
           ? []
-          : List<String>.from(json["languages"]!.map((x) => x)),
-      lastAirDate: DateTime.tryParse(json["last_air_date"] ?? ""),
-      lastEpisodeToAir: json["last_episode_to_air"] == null
-          ? null
-          : LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
-      name: json["name"] ?? "",
-      nextEpisodeToAir: json["next_episode_to_air"],
-      networks: json["networks"] == null
+          : json["languages"]!.map((x) => x as String)),
+      lastAirDate: (json["last_air_date"] == null
+              ? null
+              : DateTime.tryParse(json["last_air_date"]))
+          .obs,
+      lastEpisodeToAir: (json["last_episode_to_air"] == null
+              ? null
+              : LastEpisodeToAir.fromJson(json["last_episode_to_air"]))
+          .obs,
+      name: (json["name"] ?? "").obs,
+      nextEpisodeToAir: (json["next_episode_to_air"] == null
+              ? null
+              : NextEpisodeToAir.fromJson(json["next_episode_to_air"]))
+          .obs,
+      networks: RxList<Network>.from(json["networks"] == null
           ? []
-          : List<Network>.from(
-              json["networks"]!.map((x) => Network.fromJson(x))),
-      numberOfEpisodes: json["number_of_episodes"] ?? 0,
-      numberOfSeasons: json["number_of_seasons"] ?? 0,
-      originCountry: json["origin_country"] == null
+          : json["networks"]!.map((x) => Network.fromJson(x))),
+      numberOfEpisodes: (json["number_of_episodes"] ?? 0).obs,
+      numberOfSeasons: (json["number_of_seasons"] ?? 0).obs,
+      originCountry: RxList<String>.from(json["origin_country"] == null
           ? []
-          : List<String>.from(json["origin_country"]!.map((x) => x)),
-      originalLanguage: json["original_language"] ?? "",
-      originalName: json["original_name"] ?? "",
-      overview: json["overview"] ?? "",
-      popularity: json["popularity"] ?? 0.0,
-      posterPath: json["poster_path"] ?? "",
-      productionCompanies: json["production_companies"] == null
+          : json["origin_country"]!.map((x) => x as String)),
+      originalLanguage: (json["original_language"] ?? "").obs,
+      originalName: (json["original_name"] ?? "").obs,
+      overview: (json["overview"] ?? "").obs,
+      popularity: ((json["popularity"] as num?)?.toDouble() ?? 0.0).obs,
+      posterPath: (json["poster_path"] as String?).obs,
+      productionCompanies: RxList<Network>.from(
+          json["production_companies"] == null
+              ? []
+              : json["production_companies"]!.map((x) => Network.fromJson(x))),
+      productionCountries: RxList<ProductionCountry>.from(
+          json["production_countries"] == null
+              ? []
+              : json["production_countries"]!
+                  .map((x) => ProductionCountry.fromJson(x))),
+      seasons: RxList<SeasonElement>.from(json["seasons"] == null
           ? []
-          : List<Network>.from(
-              json["production_companies"]!.map((x) => Network.fromJson(x))),
-      productionCountries: json["production_countries"] == null
+          : json["seasons"]!.map((x) => SeasonElement.fromJson(x))),
+      spokenLanguages: RxList<SpokenLanguage>.from(json["spoken_languages"] ==
+              null
           ? []
-          : List<ProductionCountry>.from(json["production_countries"]!
-              .map((x) => ProductionCountry.fromJson(x))),
-      seasons: json["seasons"] == null
-          ? []
-          : List<SeasonElement>.from(
-              json["seasons"]!.map((x) => SeasonElement.fromJson(x))),
-      spokenLanguages: json["spoken_languages"] == null
-          ? []
-          : List<SpokenLanguage>.from(
-              json["spoken_languages"]!.map((x) => SpokenLanguage.fromJson(x))),
-      status: json["status"] ?? "",
-      tagline: json["tagline"] ?? "",
-      type: json["type"] ?? "",
-      voteAverage: json["vote_average"] ?? 0.0,
-      voteCount: json["vote_count"] ?? 0,
+          : json["spoken_languages"]!.map((x) => SpokenLanguage.fromJson(x))),
+      status: (json["status"] ?? "").obs,
+      tagline: (json["tagline"] as String?).obs,
+      type: (json["type"] ?? "").obs,
+      voteAverage: ((json["vote_average"] as num?)?.toDouble() ?? 0.0).obs,
+      voteCount: (json["vote_count"] ?? 0).obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "adult": adult,
-        "backdrop_path": backdropPath,
+        "adult": adult.value,
+        "backdrop_path": backdropPath.value,
         "created_by": createdBy.map((x) => x.toJson()).toList(),
-        "episode_run_time": episodeRunTime.map((x) => x).toList(),
-        "first_air_date":
-            "${firstAirDate?.year.toString().padLeft(4, '0')}-${firstAirDate?.month.toString().padLeft(2, '0')}-${firstAirDate?.day.toString().padLeft(2, '0')}",
-        "genres": genres.map((x) => x.toJson()).toList(),
-        "homepage": homepage,
-        "id": id,
-        "in_production": inProduction,
-        "languages": languages.map((x) => x).toList(),
-        "last_air_date":
-            "${lastAirDate?.year.toString().padLeft(4, '0')}-${lastAirDate?.month.toString().padLeft(2, '0')}-${lastAirDate?.day.toString().padLeft(2, '0')}",
-        "last_episode_to_air": lastEpisodeToAir?.toJson(),
-        "name": name,
-        "next_episode_to_air": nextEpisodeToAir,
+        "episode_run_time": episodeRunTime,
+        "first_air_date": firstAirDate.value?.toIso8601String(),
+        "genres": genres.map((x) => {"id": x.id, "name": x.name}).toList(),
+        "homepage": homepage.value,
+        "id": id.value,
+        "in_production": inProduction.value,
+        "languages": languages,
+        "last_air_date": lastAirDate.value?.toIso8601String(),
+        "last_episode_to_air": lastEpisodeToAir.value?.toJson(),
+        "name": name.value,
+        "next_episode_to_air": nextEpisodeToAir.value?.toJson(),
         "networks": networks.map((x) => x.toJson()).toList(),
-        "number_of_episodes": numberOfEpisodes,
-        "number_of_seasons": numberOfSeasons,
-        "origin_country": originCountry.map((x) => x).toList(),
-        "original_language": originalLanguage,
-        "original_name": originalName,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
+        "number_of_episodes": numberOfEpisodes.value,
+        "number_of_seasons": numberOfSeasons.value,
+        "origin_country": originCountry,
+        "original_language": originalLanguage.value,
+        "original_name": originalName.value,
+        "overview": overview.value,
+        "popularity": popularity.value,
+        "poster_path": posterPath.value,
         "production_companies":
             productionCompanies.map((x) => x.toJson()).toList(),
         "production_countries":
             productionCountries.map((x) => x.toJson()).toList(),
         "seasons": seasons.map((x) => x.toJson()).toList(),
         "spoken_languages": spokenLanguages.map((x) => x.toJson()).toList(),
-        "status": status,
-        "tagline": tagline,
-        "type": type,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
+        "status": status.value,
+        "tagline": tagline.value,
+        "type": type.value,
+        "vote_average": voteAverage.value,
+        "vote_count": voteCount.value,
       };
 
   @override
@@ -247,27 +287,31 @@ class Season {
   }
 }
 
-class CreatedBy {
+class CreatedBy extends GetxController {
   CreatedBy({
-    required this.id,
-    required this.creditId,
-    required this.name,
-    required this.gender,
-    required this.profilePath,
-  });
+    required RxInt id,
+    required RxString creditId,
+    required RxString name,
+    required RxInt gender,
+    required Rx<String?> profilePath,
+  })  : id = id,
+        creditId = creditId,
+        name = name,
+        gender = gender,
+        profilePath = profilePath;
 
-  final int id;
-  final String creditId;
-  final String name;
-  final int gender;
-  final String profilePath;
+  final RxInt id;
+  final RxString creditId;
+  final RxString name;
+  final RxInt gender;
+  final Rx<String?> profilePath;
 
   CreatedBy copyWith({
-    int? id,
-    String? creditId,
-    String? name,
-    int? gender,
-    String? profilePath,
+    RxInt? id,
+    RxString? creditId,
+    RxString? name,
+    RxInt? gender,
+    Rx<String?>? profilePath,
   }) {
     return CreatedBy(
       id: id ?? this.id,
@@ -280,97 +324,76 @@ class CreatedBy {
 
   factory CreatedBy.fromJson(Map<String, dynamic> json) {
     return CreatedBy(
-      id: json["id"] ?? 0,
-      creditId: json["credit_id"] ?? "",
-      name: json["name"] ?? "",
-      gender: json["gender"] ?? 0,
-      profilePath: json["profile_path"] ?? "",
+      id: (json["id"] ?? 0).obs,
+      creditId: (json["credit_id"] ?? "").obs,
+      name: (json["name"] ?? "").obs,
+      gender: (json["gender"] ?? 0).obs,
+      profilePath: (json["profile_path"] as String?).obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "credit_id": creditId,
-        "name": name,
-        "gender": gender,
-        "profile_path": profilePath,
+        "id": id.value,
+        "credit_id": creditId.value,
+        "name": name.value,
+        "gender": gender.value,
+        "profile_path": profilePath.value,
       };
 }
 
-class Genre {
-  Genre({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  Genre copyWith({
-    int? id,
-    String? name,
-  }) {
-    return Genre(
-      id: id ?? this.id,
-      name: name ?? this.name,
-    );
-  }
-
-  factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(
-      id: json["id"] ?? 0,
-      name: json["name"] ?? "",
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
-
-class LastEpisodeToAir {
+class LastEpisodeToAir extends GetxController {
   LastEpisodeToAir({
-    required this.id,
-    required this.name,
-    required this.airDate,
-    required this.episodeNumber,
-    required this.overview,
-    required this.productionCode,
-    required this.runtime,
-    required this.seasonNumber,
-    required this.showId,
-    required this.stillPath,
-    required this.voteAverage,
-    required this.voteCount,
-  });
+    required RxInt id,
+    required RxString name,
+    required Rx<DateTime?> airDate,
+    required RxInt episodeNumber,
+    required RxString overview,
+    required RxString productionCode,
+    required Rx<int?> runtime,
+    required RxInt seasonNumber,
+    required RxInt showId,
+    required Rx<String?> stillPath,
+    required RxDouble voteAverage,
+    required RxInt voteCount,
+  })  : id = id,
+        name = name,
+        airDate = airDate,
+        episodeNumber = episodeNumber,
+        overview = overview,
+        productionCode = productionCode,
+        runtime = runtime,
+        seasonNumber = seasonNumber,
+        showId = showId,
+        stillPath = stillPath,
+        voteAverage = voteAverage,
+        voteCount = voteCount;
 
-  final int id;
-  final String name;
-  final DateTime airDate;
-  final int episodeNumber;
-  final String overview;
-  final String productionCode;
-  final int runtime;
-  final int seasonNumber;
-  final int showId;
-  final String stillPath;
-  final double voteAverage;
-  final int voteCount;
+  final RxInt id;
+  final RxString name;
+  final Rx<DateTime?> airDate;
+  final RxInt episodeNumber;
+  final RxString overview;
+  final RxString productionCode;
+  final Rx<int?> runtime;
+  final RxInt seasonNumber;
+  final RxInt showId;
+  final Rx<String?> stillPath;
+  final RxDouble voteAverage;
+  final RxInt voteCount;
 
   LastEpisodeToAir copyWith({
-    int? id,
-    String? name,
-    DateTime? airDate,
-    int? episodeNumber,
-    String? overview,
-    String? productionCode,
-    int? runtime,
-    int? seasonNumber,
-    int? showId,
-    String? stillPath,
-    double? voteAverage,
-    int? voteCount,
+    RxInt? id,
+    RxString? name,
+    Rx<DateTime?>? airDate,
+    RxInt? episodeNumber,
+    RxString? overview,
+    RxString? productionCode,
+    Rx<int?>? runtime,
+    RxInt? seasonNumber,
+    RxInt? showId,
+    Rx<String?>? stillPath,
+    RxDouble? voteAverage,
+    RxInt? voteCount,
   }) {
     return LastEpisodeToAir(
       id: id ?? this.id,
@@ -390,56 +413,167 @@ class LastEpisodeToAir {
 
   factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) {
     return LastEpisodeToAir(
-      id: json["id"] ?? 0,
-      name: json["name"] ?? "",
-      airDate: DateTime.tryParse(json["air_date"] ?? "")!,
-      episodeNumber: json["episode_number"] ?? 0,
-      overview: json["overview"] ?? "",
-      productionCode: json["production_code"] ?? "",
-      runtime: json["runtime"] ?? 0,
-      seasonNumber: json["season_number"] ?? 0,
-      showId: json["show_id"] ?? 0,
-      stillPath: json["still_path"] ?? "",
-      voteAverage: json["vote_average"] ?? 0.0,
-      voteCount: json["vote_count"] ?? 0,
+      id: (json["id"] ?? 0).obs,
+      name: (json["name"] ?? "").obs,
+      airDate: (json["air_date"] == null
+              ? null
+              : DateTime.tryParse(json["air_date"]))
+          .obs,
+      episodeNumber: (json["episode_number"] ?? 0).obs,
+      overview: (json["overview"] ?? "").obs,
+      productionCode: (json["production_code"] ?? "").obs,
+      runtime: (json["runtime"] as int?).obs,
+      seasonNumber: (json["season_number"] ?? 0).obs,
+      showId: (json["show_id"] ?? 0).obs,
+      stillPath: (json["still_path"] as String?).obs,
+      voteAverage: ((json["vote_average"] as num?)?.toDouble() ?? 0.0).obs,
+      voteCount: (json["vote_count"] ?? 0).obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "air_date":
-            "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
-        "episode_number": episodeNumber,
-        "overview": overview,
-        "production_code": productionCode,
-        "runtime": runtime,
-        "season_number": seasonNumber,
-        "show_id": showId,
-        "still_path": stillPath,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
+        "id": id.value,
+        "name": name.value,
+        "air_date": airDate.value?.toIso8601String(),
+        "episode_number": episodeNumber.value,
+        "overview": overview.value,
+        "production_code": productionCode.value,
+        "runtime": runtime.value,
+        "season_number": seasonNumber.value,
+        "show_id": showId.value,
+        "still_path": stillPath.value,
+        "vote_average": voteAverage.value,
+        "vote_count": voteCount.value,
       };
 }
 
-class Network {
-  Network({
-    required this.id,
-    required this.name,
-    required this.logoPath,
-    required this.originCountry,
-  });
+class NextEpisodeToAir extends GetxController {
+  NextEpisodeToAir({
+    required RxInt id,
+    required RxString name,
+    required Rx<DateTime?> airDate,
+    required RxInt episodeNumber,
+    required RxString overview,
+    required RxString productionCode,
+    required Rx<int?> runtime,
+    required RxInt seasonNumber,
+    required RxInt showId,
+    required Rx<String?> stillPath,
+    required RxDouble voteAverage,
+    required RxInt voteCount,
+  })  : id = id,
+        name = name,
+        airDate = airDate,
+        episodeNumber = episodeNumber,
+        overview = overview,
+        productionCode = productionCode,
+        runtime = runtime,
+        seasonNumber = seasonNumber,
+        showId = showId,
+        stillPath = stillPath,
+        voteAverage = voteAverage,
+        voteCount = voteCount;
 
-  final int id;
-  final String name;
-  final String logoPath;
-  final String originCountry;
+  final RxInt id;
+  final RxString name;
+  final Rx<DateTime?> airDate;
+  final RxInt episodeNumber;
+  final RxString overview;
+  final RxString productionCode;
+  final Rx<int?> runtime;
+  final RxInt seasonNumber;
+  final RxInt showId;
+  final Rx<String?> stillPath;
+  final RxDouble voteAverage;
+  final RxInt voteCount;
+
+  NextEpisodeToAir copyWith({
+    RxInt? id,
+    RxString? name,
+    Rx<DateTime?>? airDate,
+    RxInt? episodeNumber,
+    RxString? overview,
+    RxString? productionCode,
+    Rx<int?>? runtime,
+    RxInt? seasonNumber,
+    RxInt? showId,
+    Rx<String?>? stillPath,
+    RxDouble? voteAverage,
+    RxInt? voteCount,
+  }) {
+    return NextEpisodeToAir(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      airDate: airDate ?? this.airDate,
+      episodeNumber: episodeNumber ?? this.episodeNumber,
+      overview: overview ?? this.overview,
+      productionCode: productionCode ?? this.productionCode,
+      runtime: runtime ?? this.runtime,
+      seasonNumber: seasonNumber ?? this.seasonNumber,
+      showId: showId ?? this.showId,
+      stillPath: stillPath ?? this.stillPath,
+      voteAverage: voteAverage ?? this.voteAverage,
+      voteCount: voteCount ?? this.voteCount,
+    );
+  }
+
+  factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) {
+    return NextEpisodeToAir(
+      id: (json["id"] ?? 0).obs,
+      name: (json["name"] ?? "").obs,
+      airDate: (json["air_date"] == null
+              ? null
+              : DateTime.tryParse(json["air_date"]))
+          .obs,
+      episodeNumber: (json["episode_number"] ?? 0).obs,
+      overview: (json["overview"] ?? "").obs,
+      productionCode: (json["production_code"] ?? "").obs,
+      runtime: (json["runtime"] as int?).obs,
+      seasonNumber: (json["season_number"] ?? 0).obs,
+      showId: (json["show_id"] ?? 0).obs,
+      stillPath: (json["still_path"] as String?).obs,
+      voteAverage: ((json["vote_average"] as num?)?.toDouble() ?? 0.0).obs,
+      voteCount: (json["vote_count"] ?? 0).obs,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id.value,
+        "name": name.value,
+        "air_date": airDate.value?.toIso8601String(),
+        "episode_number": episodeNumber.value,
+        "overview": overview.value,
+        "production_code": productionCode.value,
+        "runtime": runtime.value,
+        "season_number": seasonNumber.value,
+        "show_id": showId.value,
+        "still_path": stillPath.value,
+        "vote_average": voteAverage.value,
+        "vote_count": voteCount.value,
+      };
+}
+
+class Network extends GetxController {
+  Network({
+    required RxInt id,
+    required RxString name,
+    required Rx<String?> logoPath,
+    required RxString originCountry,
+  })  : id = id,
+        name = name,
+        logoPath = logoPath,
+        originCountry = originCountry;
+
+  final RxInt id;
+  final RxString name;
+  final Rx<String?> logoPath;
+  final RxString originCountry;
 
   Network copyWith({
-    int? id,
-    String? name,
-    String? logoPath,
-    String? originCountry,
+    RxInt? id,
+    RxString? name,
+    Rx<String?>? logoPath,
+    RxString? originCountry,
   }) {
     return Network(
       id: id ?? this.id,
@@ -451,33 +585,34 @@ class Network {
 
   factory Network.fromJson(Map<String, dynamic> json) {
     return Network(
-      id: json["id"] ?? 0,
-      name: json["name"] ?? "",
-      logoPath: json["logo_path"] ?? "",
-      originCountry: json["origin_country"] ?? "",
+      id: (json["id"] ?? 0).obs,
+      name: (json["name"] ?? "").obs,
+      logoPath: (json["logo_path"] as String?).obs,
+      originCountry: (json["origin_country"] ?? "").obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "logo_path": logoPath,
-        "origin_country": originCountry,
+        "id": id.value,
+        "name": name.value,
+        "logo_path": logoPath.value,
+        "origin_country": originCountry.value,
       };
 }
 
-class ProductionCountry {
+class ProductionCountry extends GetxController {
   ProductionCountry({
-    required this.iso31661,
-    required this.name,
-  });
+    required RxString iso31661,
+    required RxString name,
+  })  : iso31661 = iso31661,
+        name = name;
 
-  final String iso31661;
-  final String name;
+  final RxString iso31661;
+  final RxString name;
 
   ProductionCountry copyWith({
-    String? iso31661,
-    String? name,
+    RxString? iso31661,
+    RxString? name,
   }) {
     return ProductionCountry(
       iso31661: iso31661 ?? this.iso31661,
@@ -487,44 +622,50 @@ class ProductionCountry {
 
   factory ProductionCountry.fromJson(Map<String, dynamic> json) {
     return ProductionCountry(
-      iso31661: json["iso_3166_1"] ?? "",
-      name: json["name"] ?? "",
+      iso31661: (json["iso_3166_1"] ?? "").obs,
+      name: (json["name"] ?? "").obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "iso_3166_1": iso31661,
-        "name": name,
+        "iso_3166_1": iso31661.value,
+        "name": name.value,
       };
 }
 
-class SeasonElement {
+class SeasonElement extends GetxController {
   SeasonElement({
-    required this.airDate,
-    required this.episodeCount,
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.posterPath,
-    required this.seasonNumber,
-  });
+    required Rx<DateTime?> airDate,
+    required RxInt episodeCount,
+    required RxInt id,
+    required RxString name,
+    required RxString overview,
+    required Rx<String?> posterPath,
+    required RxInt seasonNumber,
+  })  : airDate = airDate,
+        episodeCount = episodeCount,
+        id = id,
+        name = name,
+        overview = overview,
+        posterPath = posterPath,
+        seasonNumber = seasonNumber;
 
-  final DateTime airDate;
-  final int episodeCount;
-  final int id;
-  final String name;
-  final String overview;
-  final String posterPath;
-  final int seasonNumber;
+  final Rx<DateTime?> airDate;
+  final RxInt episodeCount;
+  final RxInt id;
+  final RxString name;
+  final RxString overview;
+  final Rx<String?> posterPath;
+  final RxInt seasonNumber;
 
   SeasonElement copyWith({
-    DateTime? airDate,
-    int? episodeCount,
-    int? id,
-    String? name,
-    String? overview,
-    String? posterPath,
-    int? seasonNumber,
+    Rx<DateTime?>? airDate,
+    RxInt? episodeCount,
+    RxInt? id,
+    RxString? name,
+    RxString? overview,
+    Rx<String?>? posterPath,
+    RxInt? seasonNumber,
   }) {
     return SeasonElement(
       airDate: airDate ?? this.airDate,
@@ -539,40 +680,43 @@ class SeasonElement {
 
   factory SeasonElement.fromJson(Map<String, dynamic> json) {
     return SeasonElement(
-      airDate: DateTime.tryParse(json["air_date"] ?? "")!,
-      episodeCount: json["episode_count"] ?? 0,
-      id: json["id"] ?? 0,
-      name: json["name"] ?? "",
-      overview: json["overview"] ?? "",
-      posterPath: json["poster_path"] ?? "",
-      seasonNumber: json["season_number"] ?? 0,
+      airDate: (json["air_date"] == null
+              ? null
+              : DateTime.tryParse(json["air_date"]))
+          .obs,
+      episodeCount: (json["episode_count"] ?? 0).obs,
+      id: (json["id"] ?? 0).obs,
+      name: (json["name"] ?? "").obs,
+      overview: (json["overview"] ?? "").obs,
+      posterPath: (json["poster_path"] as String?).obs,
+      seasonNumber: (json["season_number"] ?? 0).obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "air_date":
-            "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
-        "episode_count": episodeCount,
-        "id": id,
-        "name": name,
-        "overview": overview,
-        "poster_path": posterPath,
-        "season_number": seasonNumber,
+        "air_date": airDate.value?.toIso8601String(),
+        "episode_count": episodeCount.value,
+        "id": id.value,
+        "name": name.value,
+        "overview": overview.value,
+        "poster_path": posterPath.value,
+        "season_number": seasonNumber.value,
       };
 }
 
-class SpokenLanguage {
+class SpokenLanguage extends GetxController {
   SpokenLanguage({
-    required this.iso6391,
-    required this.name,
-  });
+    required RxString iso6391,
+    required RxString name,
+  })  : iso6391 = iso6391,
+        name = name;
 
-  final String iso6391;
-  final String name;
+  final RxString iso6391;
+  final RxString name;
 
   SpokenLanguage copyWith({
-    String? iso6391,
-    String? name,
+    RxString? iso6391,
+    RxString? name,
   }) {
     return SpokenLanguage(
       iso6391: iso6391 ?? this.iso6391,
@@ -582,13 +726,13 @@ class SpokenLanguage {
 
   factory SpokenLanguage.fromJson(Map<String, dynamic> json) {
     return SpokenLanguage(
-      iso6391: json["iso_639_1"] ?? "",
-      name: json["name"] ?? "",
+      iso6391: (json["iso_639_1"] ?? "").obs,
+      name: (json["name"] ?? "").obs,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "iso_639_1": iso6391,
-        "name": name,
+        "iso_639_1": iso6391.value,
+        "name": name.value,
       };
 }
