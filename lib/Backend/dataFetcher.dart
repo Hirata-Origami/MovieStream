@@ -17,6 +17,7 @@ class DataFetcher extends GetxController {
   var popular = Media().obs;
   var topRated = Media().obs;
   var airingToday = Media().obs;
+  var searchResults = Media().obs;
   var episodes = <int, List<EpisodeElement>>{}.obs;
 
   void fetchMovies() async {
@@ -60,33 +61,28 @@ class DataFetcher extends GetxController {
     Map<String, dynamic> response = {};
     try {
       response = (await tmdb.v3.tv.getDetails(tvId)) as Map<String, dynamic>;
-      var seasonNumber = response['numberOfSeasons'];
-      Map allEpisodes = {};
+      var seasonNumber = response['number_of_seasons'];
+      Map<int, List<EpisodeElement>> allEpisodes = {};
       for (int i = 1; i <= seasonNumber; i++) {
         response = (await tmdb.v3.tvSeasons.getDetails(tvId, i))
             as Map<String, dynamic>;
-        List<EpisodeElement> episodesList =
-            (Episode.fromJson(response).episodes as List)
-                .map((episodeData) => EpisodeElement.fromJson(episodeData))
-                .toList();
+        Episode seasonData = Episode.fromJson(response);
+        List<EpisodeElement> episodesList = seasonData.episodes;
         allEpisodes[i] = episodesList;
       }
-      episodes.value = allEpisodes as Map<int, List<EpisodeElement>>;
-      print("hello ${allEpisodes.length}");
+      episodes.value = allEpisodes;
     } catch (e) {
       print("Error fetching season details: $e");
     }
   }
 
-  void fetchAnime() async {
+  void fetchSearch(String name) async {
     try {
       Map<String, dynamic> response =
-          (await tmdb.v3.movies.getPopular(page: 2)) as Map<String, dynamic>;
-      banner.value = Media.fromJson(response);
-      response = (await tmdb.v3.movies.getPopular()) as Map<String, dynamic>;
-      popular.value = Media.fromJson(response);
+          (await tmdb.v3.search.queryMulti(name)) as Map<String, dynamic>;
+      searchResults.value = Media.fromJson(response);
     } catch (e) {
-      print("Error fetching movies: $e");
+      print("Error fetching search results: $e");
     }
   }
 }

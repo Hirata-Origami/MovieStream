@@ -48,9 +48,6 @@ class HomePageController extends GetxController {
         airingToday.value = value;
       });
       update();
-    } else if (navigationController.selectedCategory.value == 'Anime') {
-      mediaController.fetchAnime();
-      update();
     }
   }
 }

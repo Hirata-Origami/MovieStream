@@ -202,7 +202,12 @@ class _BannerContentState extends State<BannerContent> {
                               ),
                               ElevatedButton.icon(
                                 onPressed: () => Get.to(() => VideoPlayerScreen(
-                                    movieId: media.id.value.toString())),
+                                      isTv: media.isSeries.value!,
+                                      movieId: media.id.value.toString(),
+                                      seriesId: media.id.value.toString(),
+                                      seasonNumber: 1,
+                                      episodeNumber: 1,
+                                    )),
                                 icon: Icon(Icons.play_arrow,
                                     color: Colors.black,
                                     size: widget.screenWidth * 0.08),

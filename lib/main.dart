@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => HomePage()),
-        GetPage(name: '/search', page: () => FindElement()),
+        GetPage(name: '/search', page: () => SearchMedia()),
         GetPage(name: '/wishlist', page: () => Wishlist()),
         GetPage(name: '/profile', page: () => Profile()),
       ],

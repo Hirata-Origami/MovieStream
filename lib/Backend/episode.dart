@@ -133,8 +133,8 @@ class EpisodeElement {
   final String? stillPath;
   final double? voteAverage;
   final int? voteCount;
-  final List<Crew> crew;
-  final List<Crew> guestStars;
+  final List<Crew>? crew;
+  final List<Crew>? guestStars;
 
   EpisodeElement copyWith({
     DateTime? airDate,
@@ -211,8 +211,8 @@ class EpisodeElement {
         "still_path": stillPath,
         "vote_average": voteAverage,
         "vote_count": voteCount,
-        "crew": crew.map((x) => x.toJson()).toList(),
-        "guest_stars": guestStars.map((x) => x.toJson()).toList(),
+        "crew": crew?.map((x) => x.toJson()).toList(),
+        "guest_stars": guestStars?.map((x) => x.toJson()).toList(),
       };
 
   @override

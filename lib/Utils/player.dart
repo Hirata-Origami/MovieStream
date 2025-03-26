@@ -4,9 +4,20 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class VideoPlayerScreen extends StatefulWidget {
+  final bool isTv;
   final String movieId;
+  final String seriesId;
+  final int seasonNumber;
+  final int episodeNumber;
 
-  const VideoPlayerScreen({Key? key, required this.movieId}) : super(key: key);
+  const VideoPlayerScreen(
+      {Key? key,
+      required this.isTv,
+      required this.movieId,
+      required this.seriesId,
+      required this.seasonNumber,
+      required this.episodeNumber})
+      : super(key: key);
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -17,6 +28,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen>
   WebViewController? _webViewController;
   bool _isLoading = true;
   String _currentUrl = '';
+  String site = 'https://vidsrc.xyz/embed/movie/5';
   List<String> _blockedRules = [];
 
   @override
@@ -34,6 +46,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen>
       });
       _initializeWebViewController();
     });
+    if (widget.isTv) {
+      site =
+          'https://vidsrc.xyz/embed/tv?tmdb=${widget.seriesId}&season=${widget.seasonNumber}&episode=${widget.episodeNumber}';
+    } else {
+      site = 'https://vidsrc.xyz/embed/movie/${widget.movieId}';
+    }
   }
 
   Future<List<String>> _loadBlockedRules() async {
@@ -132,7 +150,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen>
         },
       )
       ..loadRequest(
-        Uri.parse('https://vidsrc.xyz/embed/movie/${widget.movieId}'),
+        Uri.parse(site),
       );
     setState(() {});
   }

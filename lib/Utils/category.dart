@@ -67,7 +67,7 @@ class CategorySelectorState extends State<CategorySelector> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <String>['Movies', 'TV Series', 'Anime']
+                        children: <String>['Movies', 'TV Series']
                             .map((String value) {
                           final bool isSelected =
                               navigationController.selectedCategory.value ==

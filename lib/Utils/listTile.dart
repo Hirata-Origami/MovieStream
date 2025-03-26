@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:moviestream/Backend/media.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:moviestream/UI/mediaDetails.dart';
-import 'package:moviestream/Utils/viewAll.dart';
+import 'package:moviestream/UI/viewAll.dart';
 
 class ListElement extends StatelessWidget {
   const ListElement({

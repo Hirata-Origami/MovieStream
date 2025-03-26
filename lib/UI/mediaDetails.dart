@@ -22,21 +22,21 @@ class MediaDetails extends StatefulWidget {
 
 class _MediaDetailsState extends State<MediaDetails> {
   late final DataFetcher mediaController;
-  var episodes = <int, List<EpisodeElement>>{}.obs;
+  var season = <int, List<EpisodeElement>>{}.obs;
 
   @override
   void initState() {
     super.initState();
     fetchData();
-    print(episodes.length);
   }
 
   Future<void> fetchData() async {
-    Get.lazyPut<DataFetcher>(() => DataFetcher());
-    mediaController = Get.find<DataFetcher>();
-    print(widget.media.id.value!);
-    mediaController.fetchSeasonDetails(widget.media.id.value!);
-    episodes = mediaController.episodes;
+    if (widget.media.isSeries.value == true) {
+      Get.lazyPut<DataFetcher>(() => DataFetcher());
+      mediaController = Get.find<DataFetcher>();
+      mediaController.fetchSeasonDetails(widget.media.id.value!);
+      season = mediaController.episodes;
+    }
   }
 
   @override
@@ -238,7 +238,11 @@ class _MediaDetailsState extends State<MediaDetails> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Get.to(() => VideoPlayerScreen(
+                          isTv: widget.media.isSeries.value!,
                           movieId: widget.media.id.value.toString(),
+                          seriesId: widget.media.id.value.toString(),
+                          seasonNumber: 1,
+                          episodeNumber: 1,
                         ));
                   },
                   icon: Icon(Icons.play_arrow,
@@ -260,9 +264,9 @@ class _MediaDetailsState extends State<MediaDetails> {
             SizedBox(height: screenHeight * 0.04),
             if (widget.media.isSeries.value == true)
               Dropdown(
-                seasonCount: episodes.length,
-                episodes: episodes,
-              )
+                season: season,
+                id: widget.media.id.value.toString(),
+              ),
           ],
         ),
       ),
