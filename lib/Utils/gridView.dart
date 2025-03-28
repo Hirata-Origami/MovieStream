@@ -40,15 +40,20 @@ class ViewAllBody extends StatelessWidget {
                   Get.to(() => MediaDetails(media: media));
                 },
                 child: GridTile(
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${media.posterPath.value}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  child: media.backdropPath?.value != null
+                      ? CachedNetworkImage(
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500${media.posterPath.value}',
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        )
+                      : Image.asset(
+                          'assets/no_Image.jpg',
+                          fit: BoxFit.cover,
+                        ),
                 ),
               );
             },

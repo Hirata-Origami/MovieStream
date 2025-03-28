@@ -80,6 +80,7 @@ class DataFetcher extends GetxController {
     try {
       Map<String, dynamic> response =
           (await tmdb.v3.search.queryMulti(name)) as Map<String, dynamic>;
+      response['isTv'] = null;
       searchResults.value = Media.fromJson(response);
     } catch (e) {
       print("Error fetching search results: $e");

@@ -77,17 +77,20 @@ class ListElement extends StatelessWidget {
                         height: screenHeight * 0.3,
                         width: screenWidth * 0.3,
                         margin: const EdgeInsets.all(8.0),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              'https://image.tmdb.org/t/p/w500${media.posterPath.value}',
-                          height: screenHeight * 0.2,
-                          width: screenWidth * 0.3,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
+                        child: media.backdropPath?.value != null
+                            ? CachedNetworkImage(
+                                imageUrl:
+                                    'https://image.tmdb.org/t/p/w500${media.posterPath.value}',
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              )
+                            : Image.asset(
+                                'assets/no_Image.jpg',
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     );
                   },

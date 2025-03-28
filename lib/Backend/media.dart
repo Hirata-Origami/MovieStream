@@ -3,7 +3,7 @@ import "package:moviestream/Backend/movieData.dart";
 import "package:moviestream/Backend/tvData.dart";
 
 class Media extends GetxController {
-  bool isTv = false;
+  bool? isTv = false;
   var page = Rxn<int>();
   var results = <dynamic>[].obs;
 
@@ -23,9 +23,21 @@ class Media extends GetxController {
     page.value = json['page'];
     isTv = json['isTv'];
     if (json['results'] != null) {
-      final resultsList = isTv
-          ? json['results'].map((v) => TvData.fromJson(v)).toList()
-          : json['results'].map((v) => MovieData.fromJson(v)).toList();
+      final resultsList = (json['results'] as List)
+          .map((v) {
+            if (isTv != null && isTv!) {
+              return TvData.fromJson(v);
+            } else if (isTv != null && !isTv!) {
+              return MovieData.fromJson(v);
+            } else if (v['media_type'] == 'tv') {
+              return TvData.fromJson(v);
+            } else if (v['media_type'] == 'movie') {
+              return MovieData.fromJson(v);
+            }
+          })
+          .whereType<dynamic>()
+          .toList();
+
       results.addAll(resultsList);
     }
   }

@@ -101,15 +101,20 @@ class _BannerContentState extends State<BannerContent> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${media.backdropPath.value}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  media.backdropPath?.value != null
+                      ? CachedNetworkImage(
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500${media.backdropPath.value}',
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        )
+                      : Image.asset(
+                          'assets/no_Image.jpg',
+                          fit: BoxFit.cover,
+                        ),
                   Positioned(
                     bottom: 0,
                     left: 0,

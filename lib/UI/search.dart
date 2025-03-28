@@ -20,21 +20,11 @@ class SearchMedia extends StatelessWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Search',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.black87,
-        elevation: 0,
-        centerTitle: true,
-      ),
       body: Column(
         children: [
+          SizedBox(
+            height: 40,
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -140,8 +130,7 @@ class SearchController extends GetxController {
     isLoading.value = true;
     try {
       mediaController.fetchSearch(query);
-      print(1);
-      ever(mediaController.airingToday, (value) {
+      ever(mediaController.searchResults, (value) {
         mediaData.value = value;
       });
     } catch (e) {
